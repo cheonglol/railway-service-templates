@@ -1,6 +1,8 @@
 #!/bin/bash
 
-if [ -z "$PASSWORD" ]; then
+if [ -n "$HTTP_PASSWORD" ]; then
+    export PASSWORD="$HTTP_PASSWORD"
+elif [ -z "$PASSWORD" ]; then
     export PASSWORD=$(head /dev/urandom | tr -dc A-Za-z0-9 | head -c 16)
 fi
 

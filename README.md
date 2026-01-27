@@ -1,4 +1,4 @@
-# Jump Server
+# Webtop Jump Server
 
 Browser-based desktop environment for secure network access.
 

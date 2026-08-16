@@ -10,10 +10,12 @@ RUN apk add --no-cache \
     htop \
     jq \
     postgresql-client \
-    firefox
+    firefox \
+    tzdata
 
 ENV PUID=0
 ENV PGID=0
+ENV TZ=Asia/Singapore
 
 COPY entrypoint.sh /entrypoint.sh
 RUN chmod +x /entrypoint.sh

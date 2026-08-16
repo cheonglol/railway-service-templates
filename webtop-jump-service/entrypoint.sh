@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# Apply timezone so the container and cron use local time, not UTC.
+# Override with the TZ env var on Railway if needed.
+if [ -n "$TZ" ] && [ -f "/usr/share/zoneinfo/${TZ}" ]; then
+    cp "/usr/share/zoneinfo/${TZ}" /etc/localtime
+    echo "${TZ}" > /etc/timezone
+fi
+
 if [ -n "$HTTP_PASSWORD" ]; then
     export PASSWORD="$HTTP_PASSWORD"
 elif [ -z "$PASSWORD" ]; then
@@ -13,6 +20,7 @@ echo "  https://abc:${PASSWORD}@${RAILWAY_PUBLIC_DOMAIN:-jump-server.railway.int
 echo ""
 echo "  Username: abc"
 echo "  Password: $PASSWORD"
+echo "  Timezone: ${TZ:-UTC}"
 echo "=============================================="
 
 echo "Installing cron for daily restart..."
